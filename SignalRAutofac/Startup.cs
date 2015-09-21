@@ -12,28 +12,31 @@ namespace SignalRAutofac
     public class Startup
     {
         public void Configuration(IAppBuilder app)
-        { 
+        {
+
             var container = new AutofacContainer().Container;
 
             var resolver = new AutofacDependencyResolver(container);
             
 
             app.UseAutofacMiddleware(container);
+
+            resolver.UseRedis("192.168.122.213",6900, "", "FLEDGG");
             app.MapSignalR(new HubConfiguration
             {
                 Resolver = resolver
             });
-
+ 
             AddSignalRInjection(container, resolver);
         }
 
         private void AddSignalRInjection(IContainer container,IDependencyResolver resolver)
         {
             var updater = new ContainerBuilder();
-            
 
             updater.RegisterInstance(resolver.Resolve<IConnectionManager>());
             updater.Update(container);
         }
+
     }
 }

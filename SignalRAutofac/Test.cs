@@ -8,7 +8,7 @@ namespace SignalRAutofac
         public void DoStuff()
         {
             var context = ConnectionManager.GetHubContext<TestHub>();
-            context.Clients.All.hello();
+            context.Clients.All.hello("Hello!:)");
             
         }
     }
