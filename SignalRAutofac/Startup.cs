@@ -21,7 +21,7 @@ namespace SignalRAutofac
 
             app.UseAutofacMiddleware(container);
 
-            resolver.UseRedis("192.168.122.213",6900, "", "FLEDGG");
+            resolver.UseRedis("192.168.122.213",6900, "", "test");
             app.MapSignalR(new HubConfiguration
             {
                 Resolver = resolver
